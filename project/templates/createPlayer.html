@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shot Analysis</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    height: 100%;
+    background-color: #e1e9ef;
+    overflow: hidden;
+}
+
+
+.header {
+  height: 60px;
+}
+
+.form-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+
+.form-holder .form-content {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.form-content .form-items {
+    border: 3px solid #fff;
+    padding: 40px;
+    display: inline-block;
+    width: 50%;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.form-content h3 {
+    color: rgb(6, 72, 135);
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-content p {
+    color: rgb(6, 72, 135);
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+    color: rgb(6, 72, 135);
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+    width: 100%;
+    padding: 9px 10px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgb(6, 72, 135);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
+
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: #495056;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none;
+}
+.form-content button,a{
+      background-color: rgba(244, 238, 238, 0.912);
+      border-radius: 8px;
+      border-width: 0;
+      color: rgb(6, 72, 135);
+      cursor: pointer;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      padding: 10px 12px;
+      text-align: center;
+      transition: all 200ms;
+      vertical-align: baseline;
+      white-space: nowrap;
+}
+
+
+.form-content textarea {
+    position: static !important;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgb(6, 72, 135);
+    outline: none;
+    resize: none;
+    height: 120px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 50px;
+}
+
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: rgb(6, 72, 135);
+}
+
+.mv-up{
+    margin-top: -9px !important;
+    margin-bottom: 10px !important;
+}
+
+.invalid-feedback{
+    color: #ff606e;
+}
+
+.valid-feedback{
+   color: #2acc80;
+}
+    </style>
+
+</head>
+<body>
+    
+<!-- form starts here -->
+<form method="POST" action="/createPlayer" enctype="multipart/form-data", class="form-body">  
+        <div class="row">
+            <div class="form-holder"> 
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Create Player Data</h3>
+                        <div class="col-md-12">
+                            <label for="game_id">Game ID:</label>
+                            <input class="form-control" type="text" name="game_id">
+                            <label for="player_name">Player Name:</label>
+                            <input class="form-control" type="text" name="player_name">
+                            <label for="shot_number">Shot number:</label>
+                            <input class="form-control" type="text" name="shot_number">
+                            <label for="period">Period:</label>
+                            <input class="form-control" type="text" name="period">
+                            <label for="shot_dist">Shot Distance:</label>
+                            <input class="form-control" type="text" name="shot_dist">
+                            <label for="shot_res">Shot Result:</label>
+                            <select name="shot_res" id="shot_res">
+                            <option value="Made">Made</option>
+                            <option value="Missed">Missed</option>
+                            </select>
+                            <label for="pts_type">PTS Type:</label>
+                            <select name="pts_type" id="pts_type">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            </select>
+                            <label for="pts">PTS:</label>
+                            <input class="form-control" type="text" name="pts">
+                             <label for="closest_defender">Closest Defender:</label>
+                             <input class="form-control" type="text" name="closest_defender">
+                             <!--<label for="game_clock">Game Clock:</label>
+                             <input class="form-control" type="text" name="game_clock">
+                             <label for="shot_clock">Shot Clock:</label>
+                             <input class="form-control" type="text" name="shot_clock">
+                             <label for="dribbles">Dribbles:</label>
+                             <input class="form-control" type="text" name="dribbles"> -->
+                            <button class="button is-block is-info is-large is-fullwidth">Add Player Data</button>
+                            <form action="{{ url_for('admin.profile')}}" method="get">
+                                <button class="btn btn-danger">Back</button>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                </div>
+            </div>
+        </div>
+</form>
+</body>
+</html>

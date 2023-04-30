@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shot Analysis</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+    :root{
+        --green:#16a085;
+        --black:#444;
+        --light-color:#777;
+        --box-shadow:.5rem .5rem 0 rgba(22, 160, 133, .2);
+        --text-shadow:.4rem .4rem 0 rgba(0, 0, 0, .2);
+        --border:.2rem solid var(--green);
+    }
+
+    *{
+        font-family: 'Poppins', sans-serif;
+        margin:0; padding: 0;
+        box-sizing: border-box;
+        outline: none; border: none;
+        text-transform: capitalize;
+        transition: all .2s ease-out;
+        text-decoration: none;
+        font-size: 1.75rem;
+    }
+
+    html{
+        font-size: 62.5%;
+        overflow-x: hidden;
+        scroll-padding-top: 7rem;
+        scroll-behavior: smooth;
+    }
+
+    section{
+        padding:2rem 9%;
+    }
+
+    section:nth-child(even){
+        background: #f5f5f5;
+    }
+
+    .heading{
+        text-align: center;
+        padding-bottom: 2rem;
+        text-shadow: var(--text-shadow);
+        text-transform: uppercase;
+        color:var(--black);
+        font-size: 5rem;
+        letter-spacing: .4rem;
+    }
+
+    .heading span{
+        text-transform: uppercase;
+        color:var(--green);
+    }
+
+    .btn{
+        display: inline-block;
+        margin-top: 1rem;
+        padding: .5rem;
+        padding-left: 1rem;
+        border:var(--border);
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        color: rgb(16, 131, 240);
+        cursor: pointer;
+        font-size: 1.7rem;
+        background: #fff;
+    }
+
+    .btn span{
+        padding:.7rem 1rem;
+        border-radius: .5rem;
+        background:  rgb(16, 131, 240);
+        color:#fff;
+        margin-left: .5rem;
+    }
+
+    .btn:hover{
+        background:  rgb(16, 131, 240);
+        color:#fff;
+    }
+
+    .btn:hover span{
+        color:  rgb(16, 131, 240);
+        background:#fff;
+        margin-left: 1rem;
+    }
+
+    .header{
+        padding:2rem 9%;
+        position: fixed;
+        top:0; left: 0; right: 0;
+        z-index: 1000;
+        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #84c9e9;
+    }
+    .players{
+        padding:2rem 9%;
+        position: fixed;
+        top:60px; /* adjust the value as needed */
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+    }
+
+    .header .logo{
+        font-size: 2.5rem;
+        color: var(--black);
+    }
+
+    .header .logo i{
+        color: var(--green);
+    }
+
+    .header .navbar a{
+        font-size: 1.7rem;
+        color: rgb(16, 131, 240);
+        margin-left: 2rem;
+    }
+
+    .header .navbar a:hover{
+        color: var(--green);
+    }
+
+    #menu-btn{
+        font-size: 2.5rem;
+        border-radius: .5rem;
+        background: #eee;
+        color: rgb(16, 131, 240);
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        display: none;
+    }
+
+    .packages{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap:1.5rem;
+        top:200px; /* adjust the value as needed */
+        padding-top: 15rem;
+    }
+
+    .packages .image{
+        flex:1 1 45rem;
+    }
+
+    .packages .image img{
+        width: 100%;
+    }
+
+    .packages .container{
+        flex:1 1 45rem;
+    }
+
+    .packages .container h1{
+        font-family: 'Poppins', sans-serif;
+        margin: 1px;; padding: 2px;
+        box-sizing: border-box;
+        outline: none; border: none;
+        text-transform: capitalize;
+        transition: all .2s ease-out;
+        text-decoration: None;
+        font-size: 2rem;
+        color: #777;
+    }
+
+    .packages .content p{
+        font-size: 100rem;
+        color:var(--light-color);
+        line-height: 1.8;
+        padding: 1rem 0;
+    }
+    .packages .content .row .col-8{
+        font-size: 100rem;
+        color:var(--light-color);
+        line-height: 1.8;
+        padding: 1rem 0;
+    }
+
+    /* media queries  */
+    @media (max-width:991px){
+
+        html{
+            font-size: 55%;
+        }
+
+        .header{
+            padding: 2rem;
+        }
+
+        section{
+            padding:2rem;
+        }
+
+    }
+    .table-bordered {
+            border: 1px solid #dee2e6;
+            }
+
+            .table-bordered th,
+            .table-bordered td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            }
+
+            .table-bordered th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            }
+
+
+    @media (max-width:768px){
+
+        #menu-btn{
+            display: initial;
+        }
+
+        .header .navbar{
+            position: absolute;
+            top:115%; right: 2rem;
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            width: 30rem;
+            border: var(--border);
+            background: #fff;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: top right;
+            transition: none;
+        }
+
+        .header .navbar.active{
+            transform: scale(1);
+            opacity: 1;
+            transition: .2s ease-out;
+        }
+
+        .header .navbar a{
+            font-size: 2rem;
+            display: block;
+            margin:2.5rem;
+        }
+
+    }
+
+    @media (max-width:450px){
+
+        html{
+            font-size: 50%;
+        }
+
+    }
+    </style>
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#" class="logo"> </i> Shot Analysis </a>
+
+    <nav class="navbar">
+      <a href="{{ url_for('admin.profile') }}" class="navbar-item">
+        Home
+      </a>
+      <a href="{{ url_for('admin.createPlayer') }}" class="navbar-item">
+        Create Player Data
+      </a>
+    </a>
+
+      {% if not current_user.is_authenticated %}
+      <a href="{{ url_for('admin.login') }}" class="navbar-item">
+          Login
+      </a>
+      <a href="{{ url_for('admin.signup') }}" class="navbar-item">
+          Sign Up
+      </a>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+      <a href="{{ url_for('admin.logout') }}" class="navbar-item">
+          Logout
+      </a>
+      {% endif %}
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+</header>
+<body>
+    {% with messages = get_flashed_messages() %}  
+    {% if messages %}  
+          {% for message in messages %}  
+                <p>{{ message }}</p>  
+          {% endfor %}  
+    {% endif %}  
+    {% endwith %}
+<section class="players">
+    <h1>Shots of {{shot_record[0].player_name}}</h1>
+</section>
+<!--
+<section class="packages">
+  {% for record in shot_record%}
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <strong>Player Name:</strong>
+        {{ record.player_name }}<br/>
+        <strong>Shot number:</strong>
+        {{ record.shot_number }}<br/>
+        <strong>Period:</strong>
+        {{ record.period }}<br/>
+        <strong>Shot Distance</strong>
+        {{ record.shot_dist }}<br/>
+        <strong>Shot Result:</strong>
+        {{ record.shot_result }}<br/>
+        <strong>PTS Type:</strong>
+        {{ record.pts_type }}<br/>
+        <strong>PTS:</strong>
+        {{ record.pts }}<br/>
+        <strong>Closest Defender</strong>
+        {{ record.closest_defender }}<br/>
+        <form action="{{ url_for('admin.shotEdit',token = record.shot_id,_external=True)}}", method="get">  
+            <button> Edit </button>
+        </form>
+        <form action="{{ url_for('admin.shotDelete',token = record.shot_id,_external=True)}}", method="get">  
+            <button> Delete </button>
+        </form>
+        </div>
+    </div>
+    </div>
+
+  {% endfor %}  
+</section>-->
+<section class="packages">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Player Name</th>
+                <th>Shot number</th>
+                <th>Period</th>
+                <th>Shot Distance</th>
+                <th>Shot Result</th>
+                <th>PTS Type</th>
+                <th>PTS</th>
+                <th>Closest Defender</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for record in shot_record %}
+              <tr>
+                <td>{{ record.player_name }}</td>
+                <td>{{ record.shot_number }}</td>
+                <td>{{ record.period }}</td>
+                <td>{{ record.shot_dist }}</td>
+                <td>{{ record.shot_result }}</td>
+                <td>{{ record.pts_type }}</td>
+                <td>{{ record.pts }}</td>
+                <td>{{ record.closest_defender }}</td>
+                <td>
+                  <form action="{{ url_for('admin.shotEdit',token = record.shot_id,_external=True)}}" method="get">
+                    <button class="btn btn-primary">Edit</button>
+                  </form>
+                </td>
+                <td>
+                  <form action="{{ url_for('admin.shotDelete',token = record.shot_id,_external=True)}}" method="get">
+                    <button class="btn btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+</body>
+</html>

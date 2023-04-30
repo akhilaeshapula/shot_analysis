@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<title>Shot Success Rate Pie Chart</title>
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f2f2f2;
+		}
+
+		h1 {
+			text-align: center;
+			margin-top: 50px;
+			color: #444;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 50px;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		}
+
+		label {
+			margin-bottom: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #444;
+		}
+
+		input[type=text] {
+			padding: 10px;
+			border: none;
+			border-radius: 3px;
+			margin-bottom: 20px;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		}
+
+		button[type=submit] {
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			border: none;
+			border-radius: 3px;
+			color: #fff;
+			font-size: 16px;
+			cursor: pointer;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		}
+
+		img {
+			display: block;
+			margin: 0 auto;
+			margin-top: 50px;
+			max-width: 100%;
+			height: auto;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		}
+          /* CSS for the 3D chart */
+        #simple_chart {
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    button[type=submit], a.btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+</style>
+
+<body>
+	<h1>Shot Success Rate Pie Chart</h1>
+	<form method="POST">
+        <label for="player_name">Choose a player:</label>
+        <select id="player_name" name="player_name" required>
+            {% for player in players %}
+                <option value="{{ player.player_name}}">{{ player.player_name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Plot Pie Chart</button>
+        {% if made %}
+        <a href="{{ url_for('admin.profile') }}" class="btn btn-primary" style="margin-top: 20px;">Back to Profile</a>
+        {% endif %}
+    </form> 
+
+	{% if made %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var made = parseFloat('{{ made|round(2) }}');
+        var missed = parseFloat('{{ missed|round(2) }}');
+        var data = google.visualization.arrayToDataTable([
+        ['Category', 'Value'],
+        ['Made', made],
+        ['Missed', missed]
+        ]);
+        var options = {
+        title: 'Simple Chart',
+        width: 500,
+        height: 500
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('simple_chart'));
+        chart.draw(data, options);
+        }
+    </script>
+    <div style = "border: 1px solid black;">
+        <div id = "simple_chart"></div>
+    </div >
+    {% endif %}        
+</body>
+</html>
