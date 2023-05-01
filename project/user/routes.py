@@ -116,7 +116,7 @@ def shotEdit(token):
     str_cmd= " select * from data where shot_id="+token+";"
     records_shot = db.engine.execute(str_cmd).fetchall()
     print(records_shot[0])
-    return render_template('editform.html',records_shot=records_shot[0])
+    return render_template('editForm.html',records_shot=records_shot[0])
 
 @admin.route('/shotEdit',methods=['POST'])
 @login_required
