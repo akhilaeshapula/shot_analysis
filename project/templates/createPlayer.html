@@ -214,9 +214,10 @@ html, body {
                              <label for="dribbles">Dribbles:</label>
                              <input class="form-control" type="text" name="dribbles"> -->
                             <button class="button is-block is-info is-large is-fullwidth">Add Player Data</button>
-                            <form action="{{ url_for('admin.profile')}}" method="get">
+                            <a href={{ url_for('admin.profile')}}>
+                            
                                 <button class="btn btn-danger">Back</button>
-                              </form>
+                              </a>
                             </div>
                         </div>
                     </div>
